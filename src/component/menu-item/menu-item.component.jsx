@@ -1,9 +1,15 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import './menu-item.styles.scss';
 
-const MenuItem = ({ title, imageUrl, size }) => {
+const MenuItem = ({
+  title, imageUrl, size, linkUrl, history, match
+}) => {
   return (
-    <div className={`menu-item ${size}`}>
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    <div className={`menu-item ${size}`} onClick={() => history.push(`${match.url}${linkUrl}`)}>
       <div
         className="background-image"
         style={{
@@ -18,4 +24,4 @@ const MenuItem = ({ title, imageUrl, size }) => {
   );
 };
 
-export default MenuItem;
+export default withRouter(MenuItem);
