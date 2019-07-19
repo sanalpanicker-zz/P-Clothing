@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './header.style.scss';
-
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
-const Header = () => (
+const Header = ({ dropDownShow }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo" />
@@ -16,7 +18,15 @@ const Header = () => (
       <Link className="option" to="/shop">
           CONTACT
       </Link>
+      <CartIcon />
     </div>
+    {dropDownShow && <CartDropDown />}
   </div>
 );
-export default Header;
+
+const mapStateToProps = ({ cart: { dropDownShow } }) => {
+  return {
+    dropDownShow
+  };
+};
+export default connect(mapStateToProps, null)(Header);
